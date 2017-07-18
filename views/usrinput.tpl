@@ -2,8 +2,12 @@
 <html lang="en">
 <head>
 <title>Data Collection</title>
+<div id="header">
+    % include('templates\Header.html')
+</div>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <style type="text/css">
-        p {
+/*        p {
             position: absolute;
             right: 0px;
             top: -14px;
@@ -32,11 +36,11 @@
             border-radius: 10px;
             width: 350px;
         }
+*/
     </style>
 </head>
 <body>
 <form method="post" action="/input">
-<img src="https://dm8eklel4s62k.cloudfront.net/images/sky-logo-b90e8c9.jpg" alt="SkyLogo" style="width:150px;height:100px;float:left;padding-right:20px;">
 <br>
 <fieldset>
   <legend>Status update:</legend>
@@ -46,6 +50,7 @@
 </fieldset>
 <span id='c'></span>
 <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script>
 var inventory = {{!inventory}};
 console.log(inventory);
@@ -85,7 +90,7 @@ function DisplayVals2() {
             id = inventory[AreaValue][AreaValue2][floor][option]["id"];
             section = inventory[AreaValue][AreaValue2][floor][option]["location"];
             padding = longest - name.length;
-            FormBody += '<div id="MainDiv"><input type="checkbox" id="CB' + id + '" onclick="changeRadio(\'CB' + id + '\')">';
+            FormBody += '<div id="MainDiv"><input type="checkbox" id="CB' + id + '" onclick="changeRadio(\'CB' + id + '\')" >';
             FormBody += name + '<p>Location: ' + section + '</p><br>' ;
             FormBody += '<input type="radio" name="' + name + '-status" value="Working" id="BW' + id + '" disabled>Working<br>';
             FormBody += '<input type="radio" name="' + name + '-status" value="NotWorking" id="BN' + id + '" disabled>Faulty<br>';

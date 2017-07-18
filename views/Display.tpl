@@ -2,7 +2,9 @@
 <html lang="en">
 <title>Home</title>
 <head>
-<link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css"/>
+<div id="header">
+    % include('templates\Header.html')
+</div>
 <style>
 td, th
 {
@@ -19,7 +21,6 @@ th
 </style >
 </head>
 <body>
-<img src="https://dm8eklel4s62k.cloudfront.net/images/sky-logo-b90e8c9.jpg" alt="SkyLogo" style="width:150px;height:100px;float:left;">
 <table id="table" class="stripe" cellspacing="0"  width="99%">
     {{!table}}
 </table>
@@ -32,7 +33,13 @@ th
         "lengthMenu": [10, 25, 50, "All"],
         "scrollCollapse": true,
         "info":           true,
-        "paging":         true
+        "paging":         true,
+        "autoWidth":      false,
+         "columnDefs": [
+            { "width": "25%", "targets": 0 },
+            { "width": "13%", "targets": 1 },
+            { "width": "18%", "targets": 2 }
+        ]
         } );
     } );
 </script>

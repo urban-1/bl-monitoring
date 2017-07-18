@@ -1,15 +1,10 @@
 from bottle import route, run, template, request
 import config as cfg
+import sqlite3
 
+conn = cfg.conn
+c = conn.cursor()
 item = []
-
-
-def getitems():
-    for num in range(0): #AmountOfData
-        for i in range(4):
-            print('')
-            #item.append() #Device name, Floor Num, Status, Comments
-    return item
 
 
 @route('/')
@@ -26,10 +21,21 @@ def usrinput():
 
 @route('/input', method="POST")
 def data():
-    for key, v in request.POST.items():
-        print('%s-%s' %(key, v))
-    return
+    if len(request.POST) == 0:
+        return template('usrinput', inventory=cfg.inventory);
+
+    for key, value in request.POST.items():
+        name,style = key.split("-")
+        result = c.execute("""SELECT ID FROM Thing WHERE Name = '%s' LIMIT 1""" %(name)).fetchone()
+
+        if style == "Working":
+            styleStatus = 1
+        else:
+            styleStatus = 2
+        c.execute("""UPDATE ThingStatus SET Status = '%s', Comment = '%s' WHERE Thing = %s""" %(styleStatus, value, result[0]))
+
+    conn.commit()
+    return template('Thanks')
 
 
 run(host='localhost', port=8080, reloader=True)
-
