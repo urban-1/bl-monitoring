@@ -12,6 +12,9 @@ def home():
     table = cfg.GetData()
     return template('Display', table=table);
 
+@route('/getdata')
+def getdata():
+    return cfg.GetJsonData()
 
 @route('/input')
 @route('/input/')
@@ -37,5 +40,8 @@ def data():
     conn.commit()
     return template('Thanks')
 
+@route('/about')
+def about():
+    return template('About')
 
 run(host='localhost', port=8080, reloader=True)

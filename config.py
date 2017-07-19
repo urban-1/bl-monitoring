@@ -1,4 +1,5 @@
 import sqlite3
+import json
 
 inventory = {}
 
@@ -21,6 +22,7 @@ left join managementarea on thing.management = managementarea.id'''):
 
     thing = {"name": row[3], "id": row[4], "location": row[5]}
     inventory[row[0]][row[1]][row[2]].append(thing)
+
 
 def GetData():
     table = []
@@ -49,3 +51,19 @@ left join Floors on Thing.Floors = Floors.Name'''):
 
     table.append('</tbody>')
     return ''.join(table)
+
+def dict_from_row(row):
+    return dict(zip(row.keys(), row))
+
+def GetJsonData():
+    conn.row_factory = sqlite3.Row
+    c = conn.cursor()
+    data = c.execute('''
+    select Thing.Name as thing, Floors.Name as floor, Status.Name as status, ThingStatus.Comment as comment from ThingStatus
+    left join Thing on ThingStatus.Thing = Thing.ID
+    left join Status on ThingStatus.status = Status.ID
+    left join Floors on Thing.Floors = Floors.Name''')
+    ret = {"data": []}
+    for i in data:
+       ret["data"].append(dict_from_row(i))
+    return json.dumps(ret)

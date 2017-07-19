@@ -1,4 +1,41 @@
-<img src="https://dm8eklel4s62k.cloudfront.net/images/sky-logo-b90e8c9.jpg" alt="SkyLogo" style="width:150px;height:100px;float:left;padding-right:20px;">
-<div style="padding: 60px">
-    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css"/>
-</div>
+<!--<img src="https://dm8eklel4s62k.cloudfront.net/images/sky-logo-b90e8c9.jpg" alt="SkyLogo" style="width:150px;height:100px;float:left;padding-right:20px;">-->
+<link rel="stylesheet" href="https://cdn.datatables.net/1.10.15/css/jquery.dataTables.min.css"/>
+<nav class="navbar navbar-inverse navbar-fixed-top" style="float: left">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+
+          <a class="navbar-brand" href="https://www.sky.com/"> </a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/">Home</a></li>
+            <li><a href="input">Input</a></li>
+            <li><a href="about">About</a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+<script src="//code.jquery.com/jquery-1.12.4.js"></script>
+<script>
+    /*
+     * Gets url path, splits it by the slashes
+     * then compares that with the href of the nav buttons
+     * if they match it adds the class 'active' to the button
+     * thus makes it look selected
+     * if no match is found do it to the home
+     */
+    var _urlpath = $(location).attr('pathname').split('/').pop();
+
+    $('nav li').each(function(){
+        var _this = $(this);
+        var _str = _this.find('a').attr('href');
+        if (_str == "/") _str = "";
+        _str !== _urlpath ? _this.removeClass('active') : _this.addClass('active');
+    });
+</script>
